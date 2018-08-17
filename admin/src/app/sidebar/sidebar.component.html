@@ -1,0 +1,25 @@
+<button mat-button (click)="openSideBar()">
+  Menu</button>
+<mat-sidenav-container class="example-container" *ngIf="shouldRun">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+      <li class="list-group-item" routerLinkActive = "active">
+          <a class="nav-link" [routerLink] = "['/posts']">User Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive = "active">
+          <a class="nav-link" [routerLink] = "['/posts']">Report Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive = "active">
+          <a class="nav-link" [routerLink] = "['/posts']">CMS Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive = "active">
+          <a class="nav-link" [routerLink] = "['/posts']">Settings </a>
+      </li>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>

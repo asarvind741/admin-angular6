@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common'
     imports: [
     ],
     exports:[
-        
         ReactiveFormsModule
     ]
 })
