@@ -47,7 +47,7 @@
 
           <div class="form-group">
             <label>Password:</label>
-            <input type="text" class="form-control" formControlName="password">
+            <input type="password" class="form-control" formControlName="password">
             <span class="help-text" *ngIf = "signupForm.get('password').invalid && signupForm.get('password').touched">
               <span *ngIf="signupForm.get('password').errors.required">
                 Please enter password!
@@ -60,12 +60,12 @@
 
           <div class="form-group">
             <label>Password:</label>
-            <input type="text" class="form-control" formControlName="confirmPassword">
+            <input type="password" class="form-control" formControlName="confirmPassword">
             <span class="help-text" *ngIf = "signupForm.get('confirmPassword').invalid && signupForm.get('confirmPassword').touched">
               <span *ngIf="signupForm.get('confirmPassword').errors.required">
                 Please enter password!
               </span>
-              <span *ngIf="signupForm.get('v').errors.minlength">
+              <span *ngIf="signupForm.get('confirmPassword').errors.minlength">
                 Please enter a password of minimum length 6
               </span>
             </span>

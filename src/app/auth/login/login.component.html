@@ -21,7 +21,7 @@
 
           <div class="form-group">
             <label>Password:</label>
-            <input type="text" class="form-control" formControlName="password">
+            <input type="password" class="form-control" formControlName="password">
             <span class="help-text" *ngIf = "signinForm.get('password').invalid && signinForm.get('password').touched">
               <span *ngIf="signinForm.get('password').errors.required">
                 Please enter password!
