@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-    { path: '', loadChildren: './auth/auth.module#AuthModule'},
+
+    { path: '', loadChildren: './auth/auth.module#AuthModule' },
+    { path: 'manage-users', loadChildren: './user-management/user.module#UsersModule'}
+
 ]
 
 @NgModule({
@@ -11,4 +14,4 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class AppRoutingModule{}
+export class AppRoutingModule { }

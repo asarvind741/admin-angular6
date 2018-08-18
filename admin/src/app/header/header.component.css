@@ -4,3 +4,6 @@ a {
     font-weight: 600;
     font-size: 20px;
 }
+nav>button {
+    color: white;
+}

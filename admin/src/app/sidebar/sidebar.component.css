@@ -4,6 +4,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    height: 500px !important;
   }
   
   .example-events {
@@ -17,7 +18,19 @@
   }
   .list-group-item {
     background-color: rgb(245, 238, 238) !important;
+    border: none
   }
   li>a {
     color: rgb(102, 87, 87);
   }
+
+  button.mat-button.test {
+    width: 218  px;
+    background-color: rgb(245, 238, 238) !important;
+    border: none;
+    margin: 0 !important;
+}
+
+.mat-drawer-content {
+  padding: 14px;
+}

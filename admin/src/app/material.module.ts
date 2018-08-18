@@ -4,7 +4,14 @@ import {
     MatMenuModule,
     MatCardModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule
 } from '@angular/material';
 
 @NgModule({
@@ -14,7 +21,14 @@ import {
     MatCardModule,
     MatSidenavModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule
    ],
    exports: [
     MatButtonModule,
@@ -22,7 +36,14 @@ import {
     MatCardModule,
     MatSidenavModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule
    ]
 })
 
