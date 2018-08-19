@@ -1,120 +1,28 @@
-<div class="modal">
-    <div class="modal-header">
-      <h1>{{!!data.type ? 'Hinzufügen' : 'Bearbeiten'}} {{data?.type || data?.partner?.businessType}}</h1>
-      <button class="close" (click)="closeDialog()"></button>
-    </div>
-    <div class="modal-content">
-      <form [formGroup]="addBusinessPartnerFormGroup" novalidate (ngSubmit)="saveBusinessPartner()">
-        <input type="hidden" formControlName="businessType" value="{{data.type || data.partner.businessType}}">
-        <div formGroupName="nameOfLawFirm" class="form-block">
-          <p>Name der Anwaltskanzlei</p>
-          <mat-grid-list cols="2" rowHeight="70px">
-            <mat-grid-tile [colspan]="2">
-              <mat-form-field>
-                <input matInput placeholder="Name der Firma" formControlName="companyName" required>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-form-field>
-                <mat-select placeholder="Rechtsform" formControlName="legalForm" required>
-                  <mat-option [value]="'GBR'">GBR</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
-        <div formGroupName="contactPerson" class="form-block">
-          <p>Gesprächspartner</p>
-          <mat-grid-list cols="4" rowHeight="70px">
-            <mat-grid-tile>
-              <mat-form-field class="paddright">
-                <mat-select placeholder="Anrede" formControlName="salutation" required>
-                  <mat-option [value]="'Herr'">Herr</mat-option>
-                  <mat-option [value]="'Frau'">Frau</mat-option>
-                  <mat-option [value]="'DR'">DR</mat-option>
-                  <mat-option [value]="'Er'">Er</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-form-field class="paddleft">
-                <mat-select placeholder="title" formControlName="title" required>
-                  <mat-option [value]="true">Ja</mat-option>
-                  <mat-option [value]="false">Nein</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </mat-grid-tile>
-          </mat-grid-list>
-          <mat-grid-list cols="2" rowHeight="70px">
-            <mat-grid-tile>
-              <mat-form-field  class="paddright">
-                <input matInput placeholder="Vorname" formControlName="firstName" required>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-form-field  class="paddleft">
-                <input matInput placeholder="Nachname" formControlName="surname" required>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-form-field>
-                <input matInput placeholder="Telefon" formControlName="phone" required>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile [colspan]="2">
-              <mat-form-field>
-                <input matInput placeholder="Email" [readonly]="!!data.partner" formControlName="email" required>
-              </mat-form-field>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
-        <div class="align-left full-width">
-          <p>Der Kontakt hat bereits einen Devatax Account?</p>
-          <mat-radio-group formControlName="contactExists">
-            <span class="col">
-              <mat-radio-button color="primary" [value]="false">Nein</mat-radio-button>
-            </span>
-            <span class="col">
-              <mat-radio-button color="primary" [value]="true">Ja</mat-radio-button>
-            </span>
-          </mat-radio-group>
-          <div *ngIf="!!addBusinessPartnerFormGroup.value.contactExists else contactNotExists">
-            <div class="form-block options">
-              <mat-grid-list cols="2" rowHeight="70px">
-                <mat-grid-tile>
-                  <mat-form-field>
-                    <input matInput placeholder="devatax Nutzer-ID eingeben" formControlName="devTaxId">
-                  </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                  <button type="button" class="fullwidth normal" mat-raised-button (click)="validateDevTaxId()">NUTZER ID ANFORDERN</button>
-                </mat-grid-tile>
-              </mat-grid-list>
-            </div>
-          </div>
-          <ng-template #contactNotExists>
-            <div class="form-block options">
-              <mat-checkbox color="primary" class="mb20" formControlName="sendInviteToTaxConsultantForDevataxID">Senden Sie eine Einladung zum devatax-Konto an den Steuerberater</mat-checkbox>
-              <mat-checkbox color="primary" formControlName="createFolderForDataExchange">Erstellen Sie einen Ordner für den Datenaustausch</mat-checkbox>
-            </div>
-          </ng-template>
-        </div>
-        <div class="btn-group">
-          <mat-grid-list cols="2" rowHeight="70px">
-            <mat-grid-tile>
-              <button *ngIf="!!data.partner" class="fullwidth" type="button" color="warn" (click)="deleteBusinessPartner(data.partner.contactPerson.email)"
-                mat-raised-button>Geschäftspartner löschen</button>
-            </mat-grid-tile>
-            <mat-grid-tile>
-              <button class="fullwidth" *ngIf="!!data.partner else saveBtn" color="primary" mat-raised-button>Aktualisieren und fortfahren</button>
-              <ng-template #saveBtn>
-                <button class="fullwidth" mat-raised-button color="primary">Speichern und fortfahren</button>
-              </ng-template>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
-      </form>
-    </div>
-  </div>
-  
+<form [formGroup]="editUserForm" (ngSubmit)="onSave()">
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile [colspan]="6" [rowspan]="1">
+      <mat-label>First Name:</mat-label>
+      <mat-form-field>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="6" [rowspan]="1">
+      <mat-label>Last Name:</mat-label>
+      <mat-form-field>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile [colspan]="12" [rowspan]="1">
+      <mat-label>E-mail:</mat-label>
+      <mat-form-field class="first-last-class">
+        <input matInput formControlName="email">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-button type="submit" class="btn btn-primary">Save</button>
+  <button mat-button type="button" class="btn btn-danger" (click)= "onCancel()">Cancel</button>
+</form>
