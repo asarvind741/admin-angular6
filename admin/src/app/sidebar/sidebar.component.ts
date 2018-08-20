@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  events: string[] = [];
   opened: boolean;
   shouldRun = true;
+  events = [];
 
   constructor() { }
 

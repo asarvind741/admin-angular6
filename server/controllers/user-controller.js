@@ -31,7 +31,7 @@ let signupUser = (req, res) => {
     }, secret, {
         expiresIn: '24h'
     });
-    if (!!req.body.firstName || !!req.body.lastName || !!req.body.email || !!req.body.password) {
+    if (!!req.body.firstName || !!req.body.lastName || !!req.body.email || !!req.body.password ) {
         User.findOne({
                 email: req.body.email
             }).then((user1, error) => {
@@ -137,7 +137,39 @@ let confirmToken = (req, res) => {
     })
 }
 
+let getUsers = (req, res) => {
+    User.find().exec()
+    .then((users) => {
+        if(!! users) {
+            res.status(200).json(users)
+        }
+        else if(! users){
+            res.status(400).json({Message: 'There are no users'})
+        }
+    })
+    .catch((err) => {
+        res.status(401).json(err)
+    })
+}
+
+let editUser = (req, res) => {
+    console.log('req', req.body)
+    User.findOneAndUpdate({email: req.body.email}, 
+        {$set: req.body}, { new: true})
+        .then((user) => {
+            if(!user){
+                res.status(401).json({ Message: "User not found..."})
+            }
+            else if(!! user){
+                res.status(200).json({ Message: 'Updated Successfully'})
+            }
+        })
+        .catch(err => { res.status(401).json(err)})
+}
+
 module.exports = {
     signupUser,
-    confirmToken
+    confirmToken,
+    getUsers,
+    editUser
 }

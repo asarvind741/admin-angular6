@@ -7,6 +7,7 @@ import { UserComponent } from './user.component';
 import { UserRoutingModule } from './users-routing.module';
 import { UserEditFormComponent } from './user-edit-form/user-edit-form.component';
 import { ConfirmDeleteComponent } from 'src/app/user-management/confirm-delete-dialog/confirm-delete-dialog';
+import { ExcelService } from '../services/excel.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ConfirmDeleteComponent } from 'src/app/user-management/confirm-delete-d
     UserEditFormComponent
   ],
   providers: [
-    UserService
+    UserService,
+    ExcelService
   ],
 })
 export class UsersModule { }

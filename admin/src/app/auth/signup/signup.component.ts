@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      buyer: new FormControl('')
     })
   }
 
@@ -41,7 +42,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       firstName: this.signupForm.value.firstName,
       lastName: this.signupForm.value.lastName,
       email: this.signupForm.value.email,
-      password: this.signupForm.value.password
+      password: this.signupForm.value.password,
+      role: this.signupForm.value.role
      }
 
      this.useService.signupUser(user);

@@ -13,4 +13,5 @@ module.exports = (app) => {
     // User APIs
     app.post('/api/user/signup', userController.signupUser);
     app.put('/api/user/activate/:token', userController.confirmToken);
+    app.get('/api/users', userController.getUsers);
 }
