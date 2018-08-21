@@ -1,0 +1,44 @@
+.modal {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: block;
+    overflow: hidden;
+    outline: 0;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 95px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 95px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+.div-class {
+    display: inline-block;
+    text-align: center;
+    border: transparent;
+    margin: 10px;
+}
+
+.modal-header {
+    font-size: 20px;
+    font-weight: 600;
+}

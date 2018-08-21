@@ -53,12 +53,12 @@
 
 
 <div class="mat-elevation-z8">
+  <mat-label>Search:</mat-label>
   <mat-form-field>
-    <mat-label>Search:</mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Here...">
   </mat-form-field>
-  <button mat-button (click) = "exportAsExcelSheet()">Export to CSV</button>
-  <button mat-button (click) = "exportAsPDF()">Export to PDF</button>
+  <button mat-button (click)="exportAsExcelSheet()">Export to CSV</button>
+  <button mat-button (click)="exportAsPDF()">Export to PDF</button>
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->

@@ -1,0 +1,11 @@
+::ng-deep .mat-grid-tile .mat-figure {
+    display: block !important;
+}
+
+::ng-deep .first-last-class {
+    width: 200px !important;
+}
+
+.btn {
+    margin: 5px;
+}

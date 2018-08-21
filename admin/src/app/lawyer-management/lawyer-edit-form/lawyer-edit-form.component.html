@@ -1,0 +1,37 @@
+<form [formGroup]="editUserForm" (ngSubmit)="onSave()">
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile [colspan]="6" [rowspan]="1">
+      <mat-label>First Name:</mat-label>
+      <mat-form-field>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="6" [rowspan]="1">
+      <mat-label>Last Name:</mat-label>
+      <mat-form-field>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile [colspan]="12" [rowspan]="1">
+      <mat-label>E-mail:</mat-label>
+      <mat-form-field class="first-last-class">
+        <input matInput formControlName="email">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile [colspan]="6" [rowspan]="1">
+      <mat-label>Role:</mat-label>
+      <mat-form-field class="first-last-class">
+        <input matInput formControlName="role">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-button type="submit" class="btn btn-primary">Save</button>
+  <button mat-button type="button" class="btn btn-danger" (click)= "onCancel()">Cancel</button>
+</form>

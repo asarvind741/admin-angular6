@@ -40,7 +40,18 @@ export class UserService implements OnInit {
         const httpOptions = {
             headers: headers
         }
-        return this.httpClient.post(`${env.environment.API_URL}/user/edit`, user,httpOptions)
+        return this.httpClient.put(`${env.environment.API_URL}/user/edit`, user,httpOptions)
+    }
+
+    getLawyers(){
+        const headers = new HttpHeaders({'Content-type': 'application/json'})
+
+        return this.httpClient.get(`${env.environment.API_URL}/lawyer`, 
+        {observe: 'body', headers: headers})
+    }
+
+    deleteAllLawyers(){
+        
     }
     
 
