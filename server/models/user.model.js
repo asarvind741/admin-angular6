@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 let hashPassword = (password) => {
     console.log("hashed password", password, "return", bcrypt.hashPassword(password, salt))
     // return sha256(password);
-    return bcrypt.hashPassword(password, sa)
+    return bcrypt.hashSync(password, salt)
 }
 
 let userSchema = new Schema({
@@ -19,11 +19,6 @@ let userSchema = new Schema({
         type: String,
         required: true,
         unique: false,
-        role: {
-            type: String,
-            trim: true,
-            default: 'buyer'
-        },
         trim: true,
         minlength: 4,
         maxlength: 10
@@ -35,6 +30,11 @@ let userSchema = new Schema({
         trim: true,
         minlength: 4,
         maxlength: 10
+    },
+    role: {
+        type: String,
+        trim: true,
+        default: 'buyer'
     },
     email: {
         type: String,

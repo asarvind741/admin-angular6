@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+
 if (process.env.NODE_ENV == 'production') {
   require('dotenv').config({
     path: 'configs/.env'
@@ -71,6 +72,7 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./functions/graphql-main')(app)
 require('./routes')(app);
 
 app.use((req, res, next) => {

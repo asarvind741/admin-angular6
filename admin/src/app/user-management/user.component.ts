@@ -85,7 +85,7 @@
 //   ) { }
 
 //   ngOnInit() {
-    
+
 //     this.dataSource.paginator = this.paginator;
 //     this.dataSource.sort = this.sort;
 //   }
@@ -234,12 +234,7 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUsers()
-    .subscribe((users: Users[]) => {
-      this.dataSource.data = users;
-    })
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   this.getUsers()
   }
   openDialog() {
     let dialogRef = this.dialog.open(ConfirmDeleteComponent, {
@@ -258,37 +253,48 @@ export class UserComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .subscribe((data) => {
-        console.log("test")
+      .subscribe((user) => {
+        if(user){
+          this.getUsers()
+        }
       })
-
   }
 
-  applyFilter(value) {
-    value = value.trim().toLowerCase();
-    this.dataSource.filter = value;
-
+  getUsers() {
+    this.userService.getUsers()
+      .subscribe((users: Users[]) => {
+        this.dataSource.data = users;
+      })
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  exportAsExcelSheet() {
-    this.excelService.exportAsExcelFile(this.dataSource.data, 'users')
-  }
 
-  exportAsPDF() {
-    let doc = new jsPDF('p', 'pt');
-    var col = ['SN', 'Name', 'Weight', 'Symbol'];
+applyFilter(value) {
+  value = value.trim().toLowerCase();
+  this.dataSource.filter = value;
 
-    var getColumns = function () {
-      return [
-        { title: "First Name", dataKey: "first_name" },
-        { title: "Last Name", dataKey: "last_name" },
-        { title: "E-mail", dataKey: "email" },
-        { title: "role", dataKey: "role" },
-      ];
-    };
-    let dataIs = this.dataSource.data;
+}
 
-    var getData = function (){
+exportAsExcelSheet() {
+  this.excelService.exportAsExcelFile(this.dataSource.data, 'users')
+}
+
+exportAsPDF() {
+  let doc = new jsPDF('p', 'pt');
+  var col = ['SN', 'Name', 'Weight', 'Symbol'];
+
+  var getColumns = function () {
+    return [
+      { title: "First Name", dataKey: "first_name" },
+      { title: "Last Name", dataKey: "last_name" },
+      { title: "E-mail", dataKey: "email" },
+      { title: "role", dataKey: "role" },
+    ];
+  };
+  let dataIs = this.dataSource.data;
+
+  var getData = function () {
     var data = [];
 
     for (var j = 0; j < dataIs.length; j++) {
@@ -303,7 +309,7 @@ export class UserComponent implements OnInit {
   }
 
 
-doc.autoTable(getColumns(), getData())
-doc.save('user.pdf');
-  }
+  doc.autoTable(getColumns(), getData())
+  doc.save('user.pdf');
+}
 }

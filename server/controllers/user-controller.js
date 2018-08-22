@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'secrettoken';
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
+const salt = bcrypt.genSaltSync(10);
 
 var options = {
     auth: {
@@ -24,7 +25,7 @@ let signupUser = (req, res) => {
     user3.firstName = req.body.firstName;
     user3.lastName = req.body.lastName;
     user3.email = req.body.email;
-    user3.password = req.body.password;
+    user3.password = bcrypt.hashSync(req.body.password, salt);
     user3.temporaryToken = jwt.sign({
         email: user3.email,
         firstName: user3.firstName

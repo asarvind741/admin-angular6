@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA,MatDialog, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'user-edit',
@@ -13,6 +14,7 @@ import { HttpResponse } from '@angular/common/http';
 export class UserEditFormComponent implements OnInit{
     
     editUserForm: FormGroup;
+    
 
     constructor(
         private dialogRef: MatDialogRef<UserEditFormComponent>,
@@ -44,6 +46,7 @@ export class UserEditFormComponent implements OnInit{
         .subscribe((response: HttpResponse<any>) => {
             console.log("response is", response);
         })
+        this.dialogRef.close(updatedUser);
     }
 
     onCancel(){
