@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+
+  opened: boolean = false;
+  shouldRun = true;
+  events = [];
+  constructor( private router: Router) { }
 
   ngOnInit() {
+  }
+
+  openSideBar(){
+    this.opened = !this.opened;
+  }
+
+  logoutAdmin(){
+    console.log("logout")
+    localStorage.clear();
+    this.router.navigate(['/']);
+
   }
 
 }

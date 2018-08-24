@@ -1,20 +1,48 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="" class="nav-link">Home</a>
-        </li>
-      </ul>
-    </div>
-    <div class="pull-right">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="" class="nav-link">Signup</a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">Login</a>
-              </li>
-          </ul>
-    </div>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class = "menu-button" mat-button (click)="openSideBar()" [ngClass]="{'nav-open':opened}">
+          <mat-icon>home</mat-icon>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link header-links" [routerLink] = "['/manage-users']">Home</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pull-right">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive = "active">
+        <a 
+        class="nav-link header-links" 
+        (click) = "logoutAdmin()"
+        [ngStyle] = "{'cursor': 'pointer'}">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
-<app-sidebar></app-sidebar>
+<div class="main-page">
+  <mat-sidenav-container class="example-container" *ngIf="shouldRun">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+      <li class="list-group-item" routerLinkActive="active">
+        <a class="nav-link  side-navigation" [routerLink]="['/manage-users']">User Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive="active">
+        <a class="nav-link side-navigation" [routerLink]="['/manage-lawyers']">Lawyer Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive="active">
+        <a class="nav-link side-navigation" [routerLink]="['/posts']">CMS Management </a>
+      </li>
+      <li class="list-group-item" routerLinkActive="active">
+        <a class="nav-link side-navigation" [routerLink]="['/posts']">Settings </a>
+      </li>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>

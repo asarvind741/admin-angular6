@@ -20,6 +20,7 @@ var client = nodemailer.createTransport(sgTransport(options));
 
 
 let signupUser = (req, res) => {
+    // console.log("req body", req.body)
     var user3 = new User();
 
     user3.firstName = req.body.firstName;
@@ -59,13 +60,13 @@ let signupUser = (req, res) => {
                                     http:localhost:4200/activate/' + user3.temporaryToken,
                                 html: 'Hello<strong>' + user3.firstName + '</strong>,<br></br>Thank you for \
                                     registering. Please click on the link below to complete your activation:<br></br>\
-                                    <a href = "http://localhost:4200/auth/activate/' + user3.temporaryToken + '">Confirm Your Account</a>'
+                                    <a href = "http://localhost:4200/activate/' + user3.temporaryToken + '">Confirm Your Account</a>'
                             };
 
                             client.sendMail(email, function (err, info) {
                                 if (err) {
 
-                                    console.log("test", error);
+                                    console.log("test", err);
                                 } else {
                                     console.log('Message sent: ' + info.response);
                                 }
@@ -91,7 +92,6 @@ let signupUser = (req, res) => {
 }
 
 let confirmToken = (req, res) => {
-    console.log('req param', req.params)
     User.findOne({temporaryToken: req.params.token})
     .then((user)=>{
         var token = user.temporaryToken;
@@ -138,6 +138,34 @@ let confirmToken = (req, res) => {
     })
 }
 
+let loginAdmin = (req, res) => {
+    if(!!req.body.email && !!req.body.password){
+        User.findOne({email: req.body.email}).exec()
+        .then(user => {
+            if(!!user){
+                if(user.password == bcrypt.hashSync(req.body.password, salt)){
+                   const token = jwt.sign({ email: user.email, lastName: user.lastName }, secret, {
+                    expiresIn: '10h'
+                });
+                res.status(200).json({ 'user':user, 'token': token})
+                }
+                else {
+                    res.status(401).json({Error: 'Password does not match'})
+                }
+            }
+            else if(!user){
+                res.status(401).json({Error: 'User not found with this email'})
+            }
+        })
+        .catch(err => {
+            res.status(402).json(err)
+        })
+    }
+    else {
+        res.status(401).json({ Error: 'Please provide nessary Fileds'})
+    }
+}
+
 let getUsers = (req, res) => {
     User.find().exec()
     .then((users) => {
@@ -172,5 +200,6 @@ module.exports = {
     signupUser,
     confirmToken,
     getUsers,
-    editUser
+    editUser,
+    loginAdmin
 }

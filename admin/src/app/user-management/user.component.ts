@@ -221,7 +221,7 @@ declare let jsPDF: any;
 })
 export class UserComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'role', 'actions'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'actions'];
   dataSource = new MatTableDataSource<Users>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -288,8 +288,7 @@ exportAsPDF() {
     return [
       { title: "First Name", dataKey: "first_name" },
       { title: "Last Name", dataKey: "last_name" },
-      { title: "E-mail", dataKey: "email" },
-      { title: "role", dataKey: "role" },
+      { title: "E-mail", dataKey: "email" }
     ];
   };
   let dataIs = this.dataSource.data;
@@ -301,8 +300,7 @@ exportAsPDF() {
       data.push({
         first_name: dataIs[j].firstName,
         last_name: dataIs[j].lastName,
-        email: dataIs[j].email,
-        role: dataIs[j].role
+        email: dataIs[j].email
       });
     }
     return data;

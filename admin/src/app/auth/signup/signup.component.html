@@ -71,17 +71,7 @@
               </span>
             </span>
           </div>
-
-          <div class="form-group">
-            <label>Role:</label>
-            <input type="text" class="form-control" formControlName="buyer">
-            <span class="help-text" *ngIf = "signupForm.get('buyer').invalid && signupForm.get('buyer').touched">
-              <span *ngIf="signupForm.get('buyer').errors.required">
-                Please enter role !
-              </span>
-            </span>
-          </div>
-
+          
           <div class="form-group">
             <div>Already have account?
               <button class="btn btn-primary" [routerLink] = "['/']">Login</button>
