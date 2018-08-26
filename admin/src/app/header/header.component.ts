@@ -8,12 +8,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  opened: boolean = false;
+  opened: Boolean = false;
   shouldRun = true;
   events = [];
+  pages= [];
+  cmsSubmenuOpened: Boolean = false;
   constructor( private router: Router) { }
 
   ngOnInit() {
+    this.pages = ['First', 'Second', 'Third']
+  }
+
+  toggleCmsSubmenu(){
+    this.cmsSubmenuOpened = !this.cmsSubmenuOpened;
   }
 
   openSideBar(){
