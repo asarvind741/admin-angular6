@@ -13,37 +13,39 @@ export class AboutUsComponent implements OnInit {
     aboutusForm: FormGroup;
     data: any;
     editMode: boolean = false;
+    fileURL: any;
+    acceptFile
     constructor(
         private cmsService: CmsService,
         private router: Router
-    ){}
+    ) { }
 
-    ngOnInit(){
+    ngOnInit() {
         this.cmsService.aboutusSubject
-        .subscribe((data) => {
-            console.log(data)
-           this.data = data;
-        })
+            .subscribe((data) => {
+                console.log(data)
+                this.data = data;
+            })
 
         this.createForm();
         this.aboutusForm.disable()
-       
+
     }
 
-    createForm(){
+    createForm() {
         let title = '';
         let description = '';
         let imageUrl = '';
         let phoneNos = new FormArray([])
-        if(this.data){
+        if (this.data) {
             title = this.data.title;
             description = this.data.description;
             imageUrl = this.data.imageUrl;
-            if(this.data['phoneNos']){
-                for(let phoneNo of this.data.phoneNos){
+            if (this.data['phoneNos']) {
+                for (let phoneNo of this.data.phoneNos) {
                     phoneNos.push(
                         new FormGroup({
-                            'countryCode' : new FormControl(phoneNo.countryCode, Validators.required),
+                            'countryCode': new FormControl(phoneNo.countryCode, Validators.required),
                             'number': new FormControl(phoneNo.number, [Validators.required, Validators.pattern('^[1-9]+$')])
                         }))
                 }
@@ -58,25 +60,25 @@ export class AboutUsComponent implements OnInit {
         })
     }
 
-    onAddPhoneNumber(){
+    onAddPhoneNumber() {
         const control = new FormGroup({
-            'countrCode': new FormControl(null, Validators.required),
+            'countryCode': new FormControl(null, Validators.required),
             'number': new FormControl(null, Validators.required)
         });
 
         (<FormArray>this.aboutusForm.get('phoneNos')).push(control);
     }
 
-    onRemovePhoneNumber(index: number){
+    onRemovePhoneNumber(index: number) {
         (<FormArray>this.aboutusForm.get('phoneNos')).removeAt(index);
     }
 
-    editForm(){
+    editForm() {
         this.editMode = !this.editMode;
         this.aboutusForm.enable()
     }
 
-    clearForm(){
+    clearForm() {
         this.data = {}
         this.aboutusForm = new FormGroup({
             title: new FormControl('', Validators.required),
@@ -85,13 +87,35 @@ export class AboutUsComponent implements OnInit {
         })
     }
 
-    cancelForm(){
+    cancelForm() {
         this.aboutusForm.reset();
         this.router.navigate(['../manage-users'])
 
     }
 
-    submitForm(){
+    deleteImage() {
+
+        delete this.data.imageUrl;
+    }
+
+    handleFileInput(files: FileList) {
+        const reader = new FileReader();
+       
+        this.data.imageUrl = files.item(0);
+        console.log( this.data.imageUrl)
+        
+        reader.readAsDataURL(this.data.imageUrl);
+
+        reader.onload = (event: Event) => {
+            // this.data.imageUrl = event.target.result;- Invalid as it will throw an error but it will run
+            this.fileURL = reader.result;
+        }
+
+    }
+
+    
+
+    submitForm() {
         console.log(this.aboutusForm.value)
     }
 }

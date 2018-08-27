@@ -28,3 +28,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Material Icons URL
 https://material.io/tools/icons/?style=baseline
+
+# Angular tutorial
+https://auth0.com/blog/real-world-angular-series-part-6/
+
+#Error- Property result does not exist on type EventTarget-
+ instead of writing this.url = event.target.result, you can write this.url = reader.result
