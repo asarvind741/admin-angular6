@@ -34,3 +34,12 @@ https://auth0.com/blog/real-world-angular-series-part-6/
 
 #Error- Property result does not exist on type EventTarget-
  instead of writing this.url = event.target.result, you can write this.url = reader.result
+
+
+ #AWS AppAsync-
+
+ https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app.html
+
+
+# Upload files using form and formData
+https://nehalist.io/uploading-files-in-angular2/
