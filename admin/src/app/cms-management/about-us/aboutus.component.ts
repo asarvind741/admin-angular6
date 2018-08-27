@@ -98,17 +98,18 @@ export class AboutUsComponent implements OnInit {
         delete this.data.imageUrl;
     }
 
-    handleFileInput(files: FileList) {
+    handleFileInput(event) {
         const reader = new FileReader();
        
-        this.data.imageUrl = files.item(0);
-        this.aboutusForm.get('imageUrl').setValue(this.data.imageUrl)
+        let file = event.target.files[0];
+        this.aboutusForm.get('imageUrl').setValue(file)
 
         reader.readAsDataURL(this.data.imageUrl);
 
         reader.onload = (event: Event) => {
             // this.data.imageUrl = event.target.result;- Invalid as it will throw an error but it will run
             this.fileURL = reader.result;
+            console.log(this.fileURL)
         }
 
     }
@@ -120,12 +121,6 @@ export class AboutUsComponent implements OnInit {
         formData.append('Image', this.aboutusForm.get('imageUrl').value);
 
         formData.append('Contacts', this.aboutusForm.get('phoneNos').value)
-
-        console.log("form 1", formData.get('Title'))
-        console.log("form 2", formData.get('Description'))
-        console.log("form 3", formData.get('image'))
-        console.log("form 4", formData.get('Contacts'))
-
         return formData;
 
     }

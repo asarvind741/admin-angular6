@@ -140,18 +140,22 @@ let confirmToken = (req, res) => {
 
 let loginAdmin = (req, res) => {
     if(!!req.body.email && !!req.body.password){
-        User.findOne({email: req.body.email}).exec()
+        User.findOne({email: req.body.email})
         .then(user => {
             if(!!user){
-                if(user.password == bcrypt.hashSync(req.body.password, salt)){
-                   const token = jwt.sign({ email: user.email, lastName: user.lastName }, secret, {
-                    expiresIn: '10h'
-                });
-                res.status(200).json({ 'user':user, 'token': token})
-                }
-                else {
-                    res.status(401).json({Error: 'Password does not match'})
-                }
+                console.log("user", user)
+                bcrypt.compare(req.body.password, user.password, (err, result) =>{
+                    if(err){
+                        res.status(401).json({Error: 'Password does not match'})
+                    }
+                    else{
+                        console.log("res", result)
+                        const token = jwt.sign({ email: user.email, lastName: user.lastName }, secret, {
+                            expiresIn: '10h'
+                        });
+                        res.status(200).json({ 'user':user, 'token': token})
+                    }
+                })
             }
             else if(!user){
                 res.status(401).json({Error: 'User not found with this email'})

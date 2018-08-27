@@ -28,7 +28,7 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="title">Image:</label>
-            <img src={{data.imageUrl}} [ngStyle]="{'width': '221px'}">
+            <img src={{fileURL}} [ngStyle]="{'width': '221px'}">
             <button *ngIf="editMode" type="button" class="close" aria-label="Close">
               <span aria-hidden="true" (click) = "deleteImage()">&times;</span>
             </button>
@@ -41,7 +41,7 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="file">Choose File</label>
-            <input type="file" id="file" (change)="handleFileInput($event.target.files)" formControlName = "imageUrl" #fileInput>
+            <input type="file" id="file" (change)="handleFileInput($event)" formControlName = "imageUrl" #fileInput>
           </div>
         </div>
       </div>
